@@ -16,12 +16,14 @@ function App() {
           <h1 className="text-2xl font-bold">Welcome to My Website</h1>
           <p>This is a simple example of a navigation bar using Tailwind CSS in a React application.</p>
         </div>
-
-        <Routes>
+<div className="container mx-auto p-4">
+<Routes>
           <Route path="/about" element={<About />} />
           <Route path="/users" element={<Home />} />
           <Route path="/" element={<Home />} />
         </Routes>
+</div>
+       
       </div>
     </Router>
   );
