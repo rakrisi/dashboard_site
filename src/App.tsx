@@ -3,28 +3,28 @@ import {
   Route,
   Routes,
 } from 'react-router-dom';
-import About from '@/pages/about';
+import Explore from '@/pages/explore.tsx';
 import Home from '@/pages/home';
 import Navbar from '@/components/navbar';
+import Docs from "@/pages/docs.tsx";
+import Stats from "@/pages/stats.tsx";
+import Footer from "@/components/footer.tsx";
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Navbar />
-        <div className="container mx-auto p-4">
-          <h1 className="text-2xl font-bold">Welcome to My Website</h1>
-          <p>This is a simple example of a navigation bar using Tailwind CSS in a React application.</p>
+            <Routes>
+                <Route path="/" element={<Home />} />
+               <Route path="/explore" element={<Explore />} />
+                <Route path="/docs" element={<Docs />} />
+                <Route path="/stats" element={<Stats />} />
+               <Route path="/home" element={<Home />} />
+
+            </Routes>
+          <Footer/>
         </div>
-<div className="container mx-auto p-4">
-<Routes>
-          <Route path="/about" element={<About />} />
-          <Route path="/users" element={<Home />} />
-          <Route path="/" element={<Home />} />
-        </Routes>
-</div>
-       
-      </div>
     </Router>
   );
 }

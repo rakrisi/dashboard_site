@@ -11,12 +11,18 @@ const Navbar = () => {
     <nav className="bg-gray-800 p-4">
       <div className="container mx-auto flex flex-wrap items-center justify-between">
         <div className="flex items-center flex-shrink-0 text-white mr-6">
-          <span className="font-bold text-xl">MyLogo</span>
+          <a
+              href="/"
+              className="font-bold text-xl"
+          >
+            DashBoardUI
+            </a>
+
         </div>
         <div className="block lg:hidden">
           {/* Hamburger menu for mobile screens */}
           <button
-            className="flex items-center px-3 py-2 border rounded text-gray-300 border-gray-400 hover:text-white hover:border-white"
+              className="flex items-center px-3 py-2 border rounded text-gray-300 border-gray-400 hover:text-white hover:border-white"
             onClick={toggleMenu}
           >
             <svg
@@ -34,28 +40,28 @@ const Navbar = () => {
         <div className={`w-full ${isOpen ? '' : 'hidden'} lg:block lg:flex lg:items-center lg:w-auto`}>
           <div className="text-sm lg:flex-grow">
             <a
-              href="#"
+              href="/home"
               className="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-white mr-4"
             >
               Home
             </a>
             <a
-              href="#"
+              href="/explore"
               className="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-white mr-4"
             >
-              About
+              Explore
             </a>
             <a
-              href="#"
+              href="/docs"
               className="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-white mr-4"
             >
-              Services
+              Docs
             </a>
             <a
-              href="#"
+              href="/stats"
               className="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-white"
             >
-              Contact
+              Stats
             </a>
           </div>
         </div>
