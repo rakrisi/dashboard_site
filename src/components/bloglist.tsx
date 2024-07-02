@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'; // Import useParams from React Rou
 import Modal from 'react-modal';
 import CategoryFilter from '@/components/categoryfilter';
 import { fetchData, fetchCategories } from '@/lib/apiService.ts'; // Import your API service
+import { BlocksRenderer } from '@strapi/blocks-react-renderer';
 
 const customModalStyles = {
   overlay: {
@@ -119,6 +120,7 @@ const BlogList = () => {
                 <h2 className="text-xl font-bold mb-2">{selectedBlog.attributes.name}</h2>
                 <p className="text-gray-700">{selectedBlog.attributes.description}</p>
                 <p className="text-sm mt-2">Published At: {formatPublishedDate(selectedBlog.attributes.publishedAt)}</p>
+                <BlocksRenderer content={selectedBlog.attributes.content} />
                 <div className="mt-4">
                   <a
                       href={selectedBlog.attributes.url}
