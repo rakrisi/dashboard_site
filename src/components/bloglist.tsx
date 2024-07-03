@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'; // Import useParams from React Router
 import Modal from 'react-modal';
 import CategoryFilter from '@/components/categoryfilter';
+import {Button} from "@/components/ui/button.tsx";
 import { fetchData, fetchCategories } from '@/lib/apiService.ts'; // Import your API service
 import { BlocksRenderer } from '@strapi/blocks-react-renderer';
 
@@ -95,20 +96,30 @@ const BlogList = () => {
   return (
       <div className="container mx-auto mt-8">
         <CategoryFilter categories={categories} onSelectCategory={handleCategoryChange} />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {blogs.map(blog => (
-              <div key={blog.id} className="bg-white shadow-lg rounded-lg overflow-hidden">
-                <img src="https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg" alt="Blog Image" className="w-full h-48 object-cover object-center" />
-                <div className="p-4">
-                  <h2 className="text-xl font-bold mb-2">{blog.attributes.name}</h2>
-                  <p className="text-gray-700">{blog.attributes.description}</p>
-                  <button onClick={() => handleBlogClick(blog)} className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Read More
-                  </button>
-                </div>
+          <div key={blog.id} className="bg-background rounded-lg overflow-hidden shadow-md transition-all hover:scale-105">
+            <a href="#" className="block" >
+              <img
+                  src="https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg"
+                  alt="Blog Post Image"
+                  width={400}
+                  height={250}
+                  className="w-full h-48 object-cover"
+              />
+              <div className="p-4">
+                <h3 className="text-lg font-semibold mb-2">{blog.attributes.name}</h3>
+                <p className="text-muted-foreground line-clamp-2 mb-4">
+                  {blog.attributes.description}
+                </p>
+                <Button onClick={() => handleBlogClick(blog)} variant="link" className="text-primary">
+                  Read More
+                </Button>
               </div>
+            </a>
+          </div>
           ))}
-        </div>
+          </div>
         <Modal
             isOpen={modalIsOpen}
             onRequestClose={closeModal}
@@ -120,7 +131,7 @@ const BlogList = () => {
                 <h2 className="text-xl font-bold mb-2">{selectedBlog.attributes.name}</h2>
                 <p className="text-gray-700">{selectedBlog.attributes.description}</p>
                 <p className="text-sm mt-2">Published At: {formatPublishedDate(selectedBlog.attributes.publishedAt)}</p>
-                <BlocksRenderer content={selectedBlog.attributes.content} />
+                
                 <div className="mt-4">
                   <a
                       href={selectedBlog.attributes.url}

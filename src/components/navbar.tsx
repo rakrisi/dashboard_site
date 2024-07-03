@@ -1,73 +1,149 @@
-import { useState } from 'react';
 
+import { CircleUser, Menu, Package2, Search } from "lucide-react"
+
+import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Checkbox } from "@/components/ui/checkbox"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Input } from "@/components/ui/input"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
   return (
-    <nav className="bg-gray-800 p-4">
-      <div className="container mx-auto flex flex-wrap items-center justify-between">
-        <div className="flex items-center flex-shrink-0 text-white mr-6">
-          <a
-              href="/"
-              className="font-bold text-xl"
-          >
-            DashBoardUI
-            </a>
-
-        </div>
-        <div className="block lg:hidden">
-          {/* Hamburger menu for mobile screens */}
-          <button
-              className="flex items-center px-3 py-2 border rounded text-gray-300 border-gray-400 hover:text-white hover:border-white"
-            onClick={toggleMenu}
-          >
-            <svg
-              className="h-3 w-3 fill-current"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <title>Menu</title>
-              <path
-                d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"
-              />
-            </svg>
-          </button>
-        </div>
-        <div className={`w-full ${isOpen ? '' : 'hidden'} lg:block lg:flex lg:items-center lg:w-auto`}>
-          <div className="text-sm lg:flex-grow">
+      <div className="flex  w-full flex-col">
+        <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+          <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
             <a
-              href="/home"
-              className="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-white mr-4"
+                href="#"
+                className="flex items-center gap-2 text-lg font-semibold md:text-base"
             >
-              Home
+              <Package2 className="h-6 w-6" />
+              <span className="sr-only">Acme Inc</span>
             </a>
             <a
-              href="/explore"
-              className="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-white mr-4"
+                href="#"
+                className="text-muted-foreground transition-colors hover:text-foreground"
             >
-              Explore
+              Dashboard
             </a>
             <a
-              href="/docs"
-              className="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-white mr-4"
+                href="#"
+                className="text-muted-foreground transition-colors hover:text-foreground"
             >
-              Docs
+              Orders
             </a>
             <a
-              href="/stats"
-              className="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-white"
+                href="#"
+                className="text-muted-foreground transition-colors hover:text-foreground"
             >
-              Stats
+              Products
             </a>
+            <a
+                href="#"
+                className="text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Customers
+            </a>
+            <a
+                href="#"
+                className="text-foreground transition-colors hover:text-foreground"
+            >
+              Settings
+            </a>
+          </nav>
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button
+                  variant="outline"
+                  size="icon"
+                  className="shrink-0 md:hidden"
+              >
+                <Menu className="h-5 w-5" />
+                <span className="sr-only">Toggle navigation menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left">
+              <nav className="grid gap-6 text-lg font-medium">
+                <a
+                    href="#"
+                    className="flex items-center gap-2 text-lg font-semibold"
+                >
+                  <Package2 className="h-6 w-6" />
+                  <span className="sr-only">Acme Inc</span>
+                </a>
+                <a
+                    href="#"
+                    className="text-muted-foreground hover:text-foreground"
+                >
+                  Dashboard
+                </a>
+                <a
+                    href="#"
+                    className="text-muted-foreground hover:text-foreground"
+                >
+                  Orders
+                </a>
+                <a
+                    href="#"
+                    className="text-muted-foreground hover:text-foreground"
+                >
+                  Products
+                </a>
+                <a
+                    href="#"
+                    className="text-muted-foreground hover:text-foreground"
+                >
+                  Customers
+                </a>
+                <a href="#" className="hover:text-foreground">
+                  Settings
+                </a>
+              </nav>
+            </SheetContent>
+          </Sheet>
+          <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
+            <form className="ml-auto flex-1 sm:flex-initial">
+              <div className="relative">
+                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                <Input
+                    type="search"
+                    placeholder="Search products..."
+                    className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
+                />
+              </div>
+            </form>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="secondary" size="icon" className="rounded-full">
+                  <CircleUser className="h-5 w-5" />
+                  <span className="sr-only">Toggle user menu</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>Settings</DropdownMenuItem>
+                <DropdownMenuItem>Support</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>Logout</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
-        </div>
+        </header>
       </div>
-    </nav>
-  );
+  )
 }
-
 export default Navbar;

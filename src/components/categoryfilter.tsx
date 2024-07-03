@@ -2,7 +2,15 @@
 
 import React, { useState, useEffect } from 'react';
 import { fetchCategories } from '@/lib/apiService.ts'; // Import your API service
-
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
 interface CategoryFilterProps {
     onSelectCategory: (categoryId: number) => void;
 }
@@ -38,15 +46,20 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ onSelectCategory }) => 
     };
 
     return (
-        <div className="mt-4 flex justify-center">
-           <span className="p-2"> Select Category: </span>
-            <select className="p-2 rounded border" onChange={handleCategoryChange} value={selectedCategory ? selectedCategory.id : ''}>
-                <option value="" disabled>Select a category...</option>
-                {categories.map(category => (
-                    <option key={category.id} value={category.id}>{category.attributes.name}</option>
-                ))}
-            </select>
-        </div>
+        <Select>
+            <SelectTrigger>
+                <SelectValue>{selectedCategory ? selectedCategory.attributes.name : 'All Categories'}</SelectValue>
+            </SelectTrigger>
+            <SelectContent>
+                <SelectGroup>
+                    {categories.map(category => (
+                        <SelectItem key={category.id} value={category.id} onClick={handleCategoryChange}>
+                            {category.attributes.name}
+                        </SelectItem>
+                    ))}
+                </SelectGroup>
+            </SelectContent>
+        </Select>
     );
 };
 
