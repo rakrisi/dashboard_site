@@ -96,7 +96,13 @@ const BlogList = () => {
   return (
       <div className="container mx-auto mt-8">
         <CategoryFilter categories={categories} onSelectCategory={handleCategoryChange} />
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+
+        {selectedCategory && (
+            <div className="bg-blue-200 p-4 rounded-lg shadow-md mb-2">
+              <p className="text-muted-foreground">{categories.find(cat => cat.id === selectedCategory)?.attributes.name}</p>
+            </div>
+        )}<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+
           {blogs.map(blog => (
           <div key={blog.id} className="bg-background rounded-lg overflow-hidden shadow-md transition-all hover:scale-105">
             <a href="#" className="block" >
@@ -128,10 +134,10 @@ const BlogList = () => {
         >
           {selectedBlog && (
               <div className="p-4">
-                <h2 className="text-xl font-bold mb-2">{selectedBlog.attributes.name}</h2>
+                <h1 className="text-xl text-center font-bold mb-2">{selectedBlog.attributes.name}</h1>
                 <p className="text-gray-700">{selectedBlog.attributes.description}</p>
                 <p className="text-sm mt-2">Published At: {formatPublishedDate(selectedBlog.attributes.publishedAt)}</p>
-                
+                <BlocksRenderer content={selectedBlog.attributes.content} />
                 <div className="mt-4">
                   <a
                       href={selectedBlog.attributes.url}
